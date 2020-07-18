@@ -3,7 +3,6 @@ import fs from 'fs';
 import https from 'https';
 import bodyParser from 'body-parser';
 
-import { checkHeaderAuthorization } from './utils/check-header-authorization';
 import configuration from './config';
 import routes from './routes';
 import { handleError } from './utils/handle-error';
@@ -35,9 +34,6 @@ app.use((req, res, next) => {
 
 // HANDLE ERRORS
 app.use((err, req, res, next) => handleError(err, req, res));
-
-// Checks the tocken
-app.use(checkHeaderAuthorization);
 
 // In other environment, we are in charge of managing HTTPS connections
 
