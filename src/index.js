@@ -1,9 +1,10 @@
 import express from 'express';
-import bodyParser from 'body-parser';
 import fs from 'fs';
 import https from 'https';
+import bodyParser from 'body-parser';
 
 import configuration from './config';
+import routes from './routes';
 
 const app = express();
 
@@ -19,6 +20,20 @@ app.use(bodyParser.json({
 app.use(bodyParser.urlencoded({
   extended: false,
 }));
+
+// ROUTES -----------------------------------------------------------------------
+app.use('/', routes(config));
+
+// catch 404 and forward to error handler
+app.use((req, res, next) => {
+  const err = Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
+app.use((err, req, res) => {
+  res.status(err.status || 500).json(err);
+});
 
 // In other environment, we are in charge of managing HTTPS connections
 
