@@ -2,10 +2,11 @@ import express from 'express';
 import fs from 'fs';
 import https from 'https';
 import bodyParser from 'body-parser';
-import { checkHeaderAuthorization } from './utils/check-header-authorization';
 
+import { checkHeaderAuthorization } from './utils/check-header-authorization';
 import configuration from './config';
 import routes from './routes';
+import { handleError } from './utils/handle-error';
 
 const app = express();
 
@@ -22,9 +23,6 @@ app.use(bodyParser.urlencoded({
   extended: false,
 }));
 
-// Checks the tocken
-app.use(checkHeaderAuthorization);
-
 // ROUTES -----------------------------------------------------------------------
 app.use('/', routes(config));
 
@@ -35,9 +33,11 @@ app.use((req, res, next) => {
   next(err);
 });
 
-app.use((err, req, res) => {
-  res.status(err.status || 500).json(err);
-});
+// HANDLE ERRORS
+app.use((err, req, res, next) => handleError(err, req, res));
+
+// Checks the tocken
+app.use(checkHeaderAuthorization);
 
 // In other environment, we are in charge of managing HTTPS connections
 
