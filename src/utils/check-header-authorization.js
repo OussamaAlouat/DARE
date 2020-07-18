@@ -17,8 +17,9 @@ export function checkHeaderAuthorization(req, res, next) {
     return next();
   }
 
-  res.status(403);
+  res.status(401);
   return res.send({
-    error: `403 on ${req.path} because required Authorization`,
+    code: 401,
+    message: 'Unauthorized, is required Authorization header',
   });
 }
