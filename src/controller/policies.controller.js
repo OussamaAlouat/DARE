@@ -1,6 +1,6 @@
 import { getPolices } from '../api';
 import { processDataUsingLimit } from '../utils/process-data';
-import { handleError } from '../utils/handleError';
+import { handleError } from '../utils/handle-error';
 
 /* eslint-disable import/prefer-default-export */
 const policiesController = async (req, res, next, config) => {
@@ -11,7 +11,7 @@ const policiesController = async (req, res, next, config) => {
     const processedData = processDataUsingLimit(limit, resp.data);
     return res.json(processedData);
   })
-    .catch(handleError(req, res));
+    .catch((err) => handleError(err, req, res));
 };
 
 export { policiesController };
