@@ -2,6 +2,7 @@ import express from 'express';
 import fs from 'fs';
 import https from 'https';
 import bodyParser from 'body-parser';
+import { checkHeaderAuthorization } from './utils/check-header-authorization';
 
 import configuration from './config';
 import routes from './routes';
@@ -20,6 +21,9 @@ app.use(bodyParser.json({
 app.use(bodyParser.urlencoded({
   extended: false,
 }));
+
+// Checks the tocken
+app.use(checkHeaderAuthorization);
 
 // ROUTES -----------------------------------------------------------------------
 app.use('/', routes(config));
