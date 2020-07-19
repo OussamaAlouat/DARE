@@ -1,4 +1,7 @@
 export default {
   port: 3000,
   bodyLimit: '~',
-  baseUrl: '~',};
+  baseUrl: '~',
+  user: '~',
+  password: '~',
+};
