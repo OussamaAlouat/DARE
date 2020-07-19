@@ -35,6 +35,12 @@ const setDataInRequest = (result, req, res, next) => {
   next();
 };
 
+const findClientPolicie = (result, req, res, next) => {
+  const client = res.result;
+  const policie = findDataUsingParameter(client.id, result, 'clientId');
+  next(policie);
+};
+
 export {
   sendOkResponse,
   processDataLimit,
