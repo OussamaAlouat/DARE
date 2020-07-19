@@ -5,9 +5,13 @@ const sendOkResponse = (result, req, res) => {
 };
 
 const processDataLimit = (result, req, res, next) => {
-  const { data, limit } = result;
-  const processedData = processDataUsingLimit(limit, data);
+  const { limit } = req.query;
+  const processedData = processDataUsingLimit(limit, result);
   next(processedData);
 };
 
-export { sendOkResponse, processDataLimit };
+const searchDataWithId = (result, req, res, next) => {
+
+};
+
+export { sendOkResponse, processDataLimit, searchDataWithId };
