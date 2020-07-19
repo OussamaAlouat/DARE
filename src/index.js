@@ -5,7 +5,7 @@ import bodyParser from 'body-parser';
 
 import configuration from './config';
 import routes from './routes';
-import { handleError } from './utils/handle-error';
+import { handleError } from './middlewares/handle-error.middleware';
 
 const app = express();
 

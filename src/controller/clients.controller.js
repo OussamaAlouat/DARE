@@ -1,5 +1,5 @@
 import { getClients } from '../api';
-import { handleError } from '../utils/handle-error';
+import { handleError } from '../middlewares/handle-error.middleware';
 
 /* eslint-disable import/prefer-default-export */
 const clientsController = async (req, res, next, config) => {

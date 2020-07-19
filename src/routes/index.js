@@ -2,12 +2,12 @@ import { Router } from 'express';
 
 import { index } from '../controller';
 import { policiesController } from '../controller/policies.controller';
-import { checkHeaderAuthorization } from '../utils/check-header-authorization';
+import { checkHeaderAuthorization } from '../middlewares/check-header-authorization.middleware';
 import { clientsController } from '../controller/clients.controller';
 import {
   sendOkResponse, processDataLimit, searchDataWithId, processDataWithName,
   setDataInRequest, findClientPolicie, notFoundFilter,
-} from '../utils/responses.util';
+} from '../middlewares/responses.middleware';
 
 export default (config) => {
   const routes = Router();
