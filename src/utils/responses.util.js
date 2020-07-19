@@ -30,6 +30,11 @@ const processDataWithName = (result, req, res, next) => {
   }
 };
 
+const setDataInRequest = (result, req, res, next) => {
+  res.result = result;
+  next();
+};
+
 export {
   sendOkResponse,
   processDataLimit,
