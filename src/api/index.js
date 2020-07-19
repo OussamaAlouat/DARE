@@ -6,4 +6,9 @@ const getPolices = async (config, authorization) => {
   return axios.get(`${config.baseUrl}/policies`, { headers: header });
 };
 
-export { getPolices };
+const getClients = async (config, authorization) => {
+  const header = { Authorization: authorization };
+  return axios.get(`${config.baseUrl}/clients`, { headers: header });
+};
+
+export { getPolices, getClients };
