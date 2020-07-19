@@ -1,4 +1,6 @@
 /* eslint-disable no-plusplus */
+import { find } from 'lodash';
+
 const processDataUsingLimit = (limit = 10, data) => {
   const processedData = [];
 
@@ -9,4 +11,6 @@ const processDataUsingLimit = (limit = 10, data) => {
   return processedData;
 };
 
-export { processDataUsingLimit };
+const findDataUsingId = (id, data) => find(data, { id });
+
+export { processDataUsingLimit, findDataUsingId };
