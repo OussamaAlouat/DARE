@@ -1,3 +1,5 @@
 export default {
-  port: '~',
+  port: 3000,
+  bodyLimit: '~',
+  baseUrl: '~',
 };
