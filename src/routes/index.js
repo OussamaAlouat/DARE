@@ -30,5 +30,11 @@ export default (config) => {
     (result, req, res, next) => processDataLimit(result, req, res, next),
     (result, req, res, next) => sendOkResponse(result, req, res, next));
 
+  routes.get('/clients/:id',
+    (req, res, next) => checkHeaderAuthorization(req, res, next),
+    (req, res, next) => clientsController(req, res, next, config),
+    (result, req, res, next) => searchDataWithId(result, req, res, next),
+    (result, req, res, next) => sendOkResponse(result, req, res, next));
+
   return routes;
 };
