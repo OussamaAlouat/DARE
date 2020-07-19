@@ -41,9 +41,20 @@ const findClientPolicie = (result, req, res, next) => {
   next(policie);
 };
 
+const notFoundFilter = (result, req, res, next) => {
+  if (!result.length > 0) {
+    return res.status(404).json({ message: 'Not found', status: 404 });
+  }
+
+  next(result);
+};
+
 export {
   sendOkResponse,
   processDataLimit,
   searchDataWithId,
   processDataWithName,
+  setDataInRequest,
+  findClientPolicie,
+  notFoundFilter,
 };
