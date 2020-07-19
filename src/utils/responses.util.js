@@ -1,6 +1,6 @@
 import { isNil } from 'lodash';
 import {
-  processDataUsingLimit, findDataUsingId, findDataUsingName,
+  processDataUsingLimit, findDataUsingName, findDataUsingParameter,
 } from './process-data';
 
 const sendOkResponse = (result, req, res) => {
@@ -15,7 +15,7 @@ const processDataLimit = (result, req, res, next) => {
 
 const searchDataWithId = (result, req, res, next) => {
   const { id } = req.params;
-  const finded = findDataUsingId(id, result);
+  const finded = findDataUsingParameter(id, result, 'id');
   next(finded);
 };
 

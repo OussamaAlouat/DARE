@@ -15,8 +15,10 @@ const processDataUsingLimit = (limit = 10, data) => {
   return processedData;
 };
 
-const findDataUsingId = (id, data) => find(data, { id });
+const findDataUsingParameter = (
+  value, data, parameterName,
+) => find(data, { [parameterName]: value });
 
 const findDataUsingName = (name, data) => find(data, { name });
 
-export { processDataUsingLimit, findDataUsingId, findDataUsingName };
+export { processDataUsingLimit, findDataUsingParameter, findDataUsingName };
