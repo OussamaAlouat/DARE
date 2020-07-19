@@ -2,6 +2,10 @@
 import { find } from 'lodash';
 
 const processDataUsingLimit = (limit = 10, data) => {
+  if (data.length <= limit) {
+    return data;
+  }
+
   const processedData = [];
 
   for (let i = 0; i < limit; i++) {
