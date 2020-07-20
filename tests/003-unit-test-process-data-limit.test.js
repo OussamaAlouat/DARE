@@ -1,5 +1,5 @@
 import test from 'tape';
-import { processDataUsingLimit } from '../src/utils/process-data';
+import { processDataUsingLimit } from '../src/utils/process-data.util';
 
 test('-------- Process data using limit', (assert) => {
   const data = ['Test1', 'Test2', 'Test3'];
