@@ -4,10 +4,12 @@ import { index } from '../controller';
 import { policiesController } from '../controller/policies.controller';
 import { checkHeaderAuthorization } from '../middlewares/check-header-authorization.middleware';
 import { clientsController } from '../controller/clients.controller';
+import { loginController } from '../controller/login.controller';
 import {
   sendOkResponse, processDataLimit, searchDataWithId, processDataWithName,
   setDataInRequest, findClientPolicie, notFoundFilter,
 } from '../middlewares/responses.middleware';
+import { tokenCheker } from '../middlewares/token-checker.middleware';
 
 export default (config) => {
   const routes = Router();
@@ -16,13 +18,12 @@ export default (config) => {
     (req, res, next) => index(req, res, next));
 
   routes.get('/policies',
-    (req, res, next) => checkHeaderAuthorization(req, res, next),
+    (req, res, next) => tokenCheker(req, res, next, config),
     (req, res, next) => policiesController(req, res, next, config),
     (result, req, res, next) => processDataLimit(result, req, res, next),
     (result, req, res, next) => sendOkResponse(result, req, res, next));
 
   routes.get('/policies/:id',
-    (req, res, next) => checkHeaderAuthorization(req, res, next),
     (req, res, next) => policiesController(req, res, next, config),
     (result, req, res, next) => searchDataWithId(result, req, res, next),
     (result, req, res, next) => sendOkResponse(result, req, res, next));
