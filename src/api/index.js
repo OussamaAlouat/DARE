@@ -11,4 +11,13 @@ const getClients = async (config, authorization) => {
   return axios.get(`${config.baseUrl}/clients`, { headers: header });
 };
 
-export { getPolices, getClients };
+const login = async (config) => {
+  const payload = {
+    client_id: config.user,
+    client_secret: config.password,
+  };
+
+  return axios.post(`${config.baseUrl}/login`, payload);
+};
+
+export { getPolices, getClients, login };
