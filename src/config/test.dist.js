@@ -4,4 +4,6 @@ export default {
   baseUrl: '~',
   user: '~',
   password: '~',
+  secretToken: '~',
+  token: undefined,
 };
