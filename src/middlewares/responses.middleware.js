@@ -16,7 +16,7 @@ const processDataLimit = (result, req, res, next) => {
 const searchDataWithId = (result, req, res, next) => {
   const { id } = req.params;
   const finded = findDataUsingParameter(id, result, 'id');
-  next(finded);
+  next(finded ? [finded] : finded);
 };
 
 const processDataWithName = (result, req, res, next) => {
@@ -36,7 +36,7 @@ const setDataInRequest = (result, req, res, next) => {
 };
 
 const findClientPolicie = (result, req, res, next) => {
-  const client = res.result;
+  const client = res.result[0];
   const policie = findDataUsingParameter(client.id, result, 'clientId');
   next(policie);
 };
