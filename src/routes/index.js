@@ -9,6 +9,8 @@ import {
   setDataInRequest, findClientPolicie, notFoundFilter,
 } from '../middlewares/responses.middleware';
 import { tokenCheker } from '../middlewares/token-checker.middleware';
+import { checkHeaderAuthorization } from '../middlewares/check-header-authorization.middleware';
+import { verifyToken } from '../middlewares/verify-token.middleware';
 
 export default (config) => {
   const routes = Router();
@@ -17,18 +19,24 @@ export default (config) => {
     (req, res, next) => index(req, res, next));
 
   routes.get('/policies',
+    (req, res, next) => checkHeaderAuthorization(req, res, next, config),
+    (req, res, next) => verifyToken(req, res, next, config),
     (req, res, next) => tokenCheker(req, res, next, config),
     (req, res, next) => policiesController(req, res, next, config),
     (result, req, res, next) => processDataLimit(result, req, res, next),
     (result, req, res, next) => sendOkResponse(result, req, res, next));
 
   routes.get('/policies/:id',
+    (req, res, next) => checkHeaderAuthorization(req, res, next, config),
+    (req, res, next) => verifyToken(req, res, next, config),
     (req, res, next) => tokenCheker(req, res, next, config),
     (req, res, next) => policiesController(req, res, next, config),
     (result, req, res, next) => searchDataWithId(result, req, res, next),
     (result, req, res, next) => sendOkResponse(result, req, res, next));
 
   routes.get('/clients',
+    (req, res, next) => checkHeaderAuthorization(req, res, next, config),
+    (req, res, next) => verifyToken(req, res, next, config),
     (req, res, next) => tokenCheker(req, res, next, config),
     (req, res, next) => clientsController(req, res, next, config),
     (result, req, res, next) => processDataWithName(result, req, res, next),
@@ -36,12 +44,16 @@ export default (config) => {
     (result, req, res, next) => sendOkResponse(result, req, res, next));
 
   routes.get('/clients/:id',
+    (req, res, next) => checkHeaderAuthorization(req, res, next, config),
+    (req, res, next) => verifyToken(req, res, next, config),
     (req, res, next) => tokenCheker(req, res, next, config),
     (req, res, next) => clientsController(req, res, next, config),
     (result, req, res, next) => searchDataWithId(result, req, res, next),
     (result, req, res, next) => sendOkResponse(result, req, res, next));
 
   routes.get('/clients/:id/policies',
+    (req, res, next) => checkHeaderAuthorization(req, res, next, config),
+    (req, res, next) => verifyToken(req, res, next, config),
     (req, res, next) => tokenCheker(req, res, next, config),
     (req, res, next) => clientsController(req, res, next, config),
     (result, req, res, next) => searchDataWithId(result, req, res, next),
@@ -52,7 +64,8 @@ export default (config) => {
     (result, req, res, next) => sendOkResponse(result, req, res, next));
 
   routes.post('/login',
-    (req, res, next) => loginController(req, res, next, config));
+    (req, res, next) => loginController(req, res, next, config),
+    (result, req, res, next) => sendOkResponse(result, req, res, next));
 
   return routes;
 };
