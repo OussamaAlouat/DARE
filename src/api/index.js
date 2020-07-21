@@ -1,5 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
+import '@babel/polyfill';
 
 const getPolices = async (config, authorization) => {
   const header = { Authorization: authorization };

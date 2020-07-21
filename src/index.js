@@ -7,6 +7,8 @@ import configuration from './config';
 import routes from './routes';
 import { handleError } from './middlewares/handle-error.middleware';
 
+import '@babel/polyfill';
+
 const app = express();
 
 // CONFIG ------------------
