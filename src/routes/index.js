@@ -51,5 +51,8 @@ export default (config) => {
     (result, req, res, next) => findClientPolicie(result, req, res, next),
     (result, req, res, next) => sendOkResponse(result, req, res, next));
 
+  routes.post('/login',
+    (req, res, next) => loginController(req, res, next, config));
+
   return routes;
 };
