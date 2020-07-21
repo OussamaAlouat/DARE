@@ -1,4 +1,5 @@
 import { handleError } from '../middlewares/handle-error.middleware';
+import { getToken } from '../middlewares/auth.middleware';
 
 /* eslint-disable import/prefer-default-export */
 const loginController = async (req, res, next, config) => {
@@ -10,7 +11,8 @@ const loginController = async (req, res, next, config) => {
     return handleError(err, req, res);
   }
 
-  res.send({ message: 'Login completed!' });
+  const token = await getToken(config);
+  next({ token });
 };
 
 export { loginController };
