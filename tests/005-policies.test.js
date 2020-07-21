@@ -30,6 +30,7 @@ test('-------- Controller: Get policies ', (assert) => {
               assert.true(isArray(data), 'Response should be an array');
               assert.true(data.length > 0, 'Response should have policies in the array');
               assert.end();
+              server.close();
             }, (err) => {
               assert.fail(err.message);
               assert.end();
