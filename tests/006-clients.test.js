@@ -148,4 +148,3 @@ test('-------- Controller: Get clients/:id/policies ', (assert) => {
       },
     );
 });
-
