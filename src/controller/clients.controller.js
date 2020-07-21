@@ -4,9 +4,7 @@ import { setExternalToken } from '../utils/token.util';
 import constants from '../models/constants.model';
 /* eslint-disable import/prefer-default-export */
 const clientsController = async (req, res, next, config) => {
-  const token = req.headers.authorization;
-
-  return getClients(config, token).then((response) => {
+  getClients(config, config.token).then((response) => {
     next(response.data);
   })
     .catch(async (err) => {
