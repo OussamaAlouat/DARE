@@ -2,7 +2,6 @@ import { Router } from 'express';
 
 import { index } from '../controller';
 import { policiesController } from '../controller/policies.controller';
-import { checkHeaderAuthorization } from '../middlewares/check-header-authorization.middleware';
 import { clientsController } from '../controller/clients.controller';
 import { loginController } from '../controller/login.controller';
 import {
@@ -24,25 +23,26 @@ export default (config) => {
     (result, req, res, next) => sendOkResponse(result, req, res, next));
 
   routes.get('/policies/:id',
+    (req, res, next) => tokenCheker(req, res, next, config),
     (req, res, next) => policiesController(req, res, next, config),
     (result, req, res, next) => searchDataWithId(result, req, res, next),
     (result, req, res, next) => sendOkResponse(result, req, res, next));
 
   routes.get('/clients',
-    (req, res, next) => checkHeaderAuthorization(req, res, next),
+    (req, res, next) => tokenCheker(req, res, next, config),
     (req, res, next) => clientsController(req, res, next, config),
     (result, req, res, next) => processDataWithName(result, req, res, next),
     (result, req, res, next) => processDataLimit(result, req, res, next),
     (result, req, res, next) => sendOkResponse(result, req, res, next));
 
   routes.get('/clients/:id',
-    (req, res, next) => checkHeaderAuthorization(req, res, next),
+    (req, res, next) => tokenCheker(req, res, next, config),
     (req, res, next) => clientsController(req, res, next, config),
     (result, req, res, next) => searchDataWithId(result, req, res, next),
     (result, req, res, next) => sendOkResponse(result, req, res, next));
 
   routes.get('/clients/:id/policies',
-    (req, res, next) => checkHeaderAuthorization(req, res, next),
+    (req, res, next) => tokenCheker(req, res, next, config),
     (req, res, next) => clientsController(req, res, next, config),
     (result, req, res, next) => searchDataWithId(result, req, res, next),
     (result, req, res, next) => notFoundFilter(result, req, res, next), // not found client
